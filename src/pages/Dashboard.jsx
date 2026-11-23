@@ -12,6 +12,8 @@ function Dashboard() {
         <Link to="/clientes">Ver clientes</Link>
         {' | '}
         <Link to="/">Volver al Login</Link>
+        {' | '}
+        <Link to="/categorias">Ver categorías</Link>
       </nav>
     </main>
   )
