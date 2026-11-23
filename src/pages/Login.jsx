@@ -1,15 +1,49 @@
 
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
-  const [usuario, setUsuario] = useState('')
+  const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
+  const [error, setError] = useState('')
+  const [cargando, setCargando] = useState(false)
 
-  function manejarLogin(evento) {
+  const navigate = useNavigate()
+
+  async function manejarLogin(evento) {
     evento.preventDefault()
+    setError('')
+    setCargando(true)
 
-    console.log('Usuario:', usuario)
-    console.log('Formulario enviado correctamente')
+    try {
+      const respuesta = await fetch('http://localhost:8080/api/usuario/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          correo: correo,
+          contrasenal: contrasena
+        })
+      })
+
+      if (!respuesta.ok) {
+        throw new Error('Correo o contraseña incorrectos')
+      }
+
+      const usuario = await respuesta.json()
+
+      if (!usuario || !usuario.idUsuario) {
+        throw new Error('No se pudo validar el usuario')
+      }
+
+      navigate('/dashboard')
+
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setCargando(false)
+    }
   }
 
   return (
@@ -18,14 +52,14 @@ function Login() {
       <p>Bienvenido a Ferrestock</p>
 
       <form onSubmit={manejarLogin}>
-        <label htmlFor="usuario">Usuario</label>
+        <label htmlFor="correo">Correo electrónico</label>
         <input
-          id="usuario"
-          name="usuario"
-          type="text"
-          placeholder="Ingresa tu usuario"
-          value={usuario}
-          onChange={(evento) => setUsuario(evento.target.value)}
+          id="correo"
+          name="correo"
+          type="email"
+          placeholder="Ingresa tu correo"
+          value={correo}
+          onChange={(evento) => setCorreo(evento.target.value)}
           required
         />
 
@@ -40,7 +74,11 @@ function Login() {
           required
         />
 
-        <button type="submit">Ingresar</button>
+        <button type="submit" disabled={cargando}>
+          {cargando ? 'Ingresando...' : 'Ingresar'}
+        </button>
+
+        {error && <p role="alert">{error}</p>}
       </form>
     </main>
   )
