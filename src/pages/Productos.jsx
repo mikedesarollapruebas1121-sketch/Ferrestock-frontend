@@ -1,61 +1,29 @@
 
-import { useEffect, useState } from 'react'
+import ProductoForm from '../components/ProductoForm.jsx'
+import ProductoCard from '../components/ProductoCard.jsx'
+import useProductos from '../hooks/useProductos.js'
+import useCategorias from '../hooks/useCategorias.js'
+import useFormularioProducto from '../hooks/useFormularioProducto.js'
 
-function Productos() {
-  const [productos, setProductos] = useState([])
-  const [cargando, setCargando] = useState(true)
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    async function cargarProductos() {
-      try {
-        const respuesta = await fetch(
-          'http://localhost:8080/api/producto/'
-        )
-
-        if (!respuesta.ok) {
-          throw new Error('No se pudieron cargar los productos')
-        }
-
-        const datos = await respuesta.json()
-        setProductos(datos)
-      } catch (error) {
-        setError(error.message)
-      } finally {
-        setCargando(false)
-      }
-    }
-
-    cargarProductos()
-  }, [])
-
-  if (cargando) {
-    return <p>Cargando productos...</p>
-  }
-
-  if (error) {
-    return <p role="alert">{error}</p>
-  }
+export default function Productos() {
+  const { productos, error, guardar, eliminar } = useProductos()
+  const categorias = useCategorias()
+  const formulario = useFormularioProducto(guardar)
 
   return (
     <main>
-      <h1>Productos de Ferrestock</h1>
-
-      {productos.length === 0 ? (
-        <p>No hay productos registrados.</p>
-      ) : (
-        <section>
-          {productos.map((producto) => (
-  <article key={producto.idProducto}>
-              <h2>{producto.nombre}</h2>
-              <p>Precio: ${producto.precio}</p>
-              <p>Stock: {producto.stock}</p>
-            </article>
-          ))}
-        </section>
-      )}
+      <h1>Gestión de productos - Ferrestock</h1>
+      {error && <p role="alert">{error}</p>}
+      <ProductoForm {...formulario} categorias={categorias} />
+      <section>
+        <h2>Listado de productos</h2>
+        {productos.map((producto) => (
+          <ProductoCard key={producto.idProducto}
+            producto={producto}
+            editar={formulario.editar}
+            eliminar={eliminar} />
+        ))}
+      </section>
     </main>
   )
 }
-
-export default Productos
