@@ -1,13 +1,23 @@
 
 import { useState } from 'react'
 import { registrarFactura } from '../services/facturaService'
+import CarritoItem from './CarritoItem.jsx'
 
-export default function Carrito({ productos, onAumentar, onDisminuir, onVaciar }) {
+export default function Carrito({ productos, onAumentar, onDisminuir, onEliminar, onVaciar }) {
   const [comprando, setComprando] = useState(false)
   const [mensaje, setMensaje] = useState('')
-  const total = productos.reduce(
-    (suma, p) => suma + Number(p.precio) * p.cantidad, 0
-  )
+  const [productosAnteriores, setProductosAnteriores] = useState(productos)
+
+if (productosAnteriores !== productos) {
+  setProductosAnteriores(productos)
+
+  if (productos.length > 0) {
+    setMensaje('')
+  }
+}
+ 
+  const total = productos.reduce((suma, p) => suma + Number(p.precio) * p.cantidad, 0)
+  const cantidad = productos.reduce((suma, p) => suma + p.cantidad, 0)
 
   async function finalizarCompra() {
     setComprando(true)
@@ -24,28 +34,42 @@ export default function Carrito({ productos, onAumentar, onDisminuir, onVaciar }
   }
 
   return (
-    <section>
-      <h2>Carrito de compras</h2>
-      {productos.length === 0 && <p>El carrito está vacío.</p>}
-      {productos.map((p) => (
-        <article key={p.idProducto}>
-          <h3>{p.nombre}</h3>
-          <p>${Number(p.precio).toLocaleString('es-CO')}</p>
-          <button onClick={() => onDisminuir(p.idProducto)} disabled={comprando}>-</button>
-          <span> {p.cantidad} </span>
-          <button onClick={() => onAumentar(p.idProducto)} disabled={comprando}>+</button>
-        </article>
-      ))}
-      <h3>Total: ${total.toLocaleString('es-CO')}</h3>
+    <section className="card ferre-cart">
+      <div className="ferre-cart-heading">
+        <h2>Carrito</h2>
+        <span>{cantidad} items</span>
+      </div>
+
+      {productos.length === 0 &&
+        <p className="ferre-cart-empty">El carrito está vacío.</p>}
+
+      <ul className="ferre-cart-list">
+        {productos.map(p => (
+          <CarritoItem key={p.idProducto} producto={p}
+            aumentar={onAumentar} disminuir={onDisminuir}
+            eliminar={onEliminar} comprando={comprando} />
+        ))}
+      </ul>
+
+      <div className="ferre-total">
+        <strong>Total</strong>
+        <strong>${total.toLocaleString('es-CO')}</strong>
+      </div>
+
       {productos.length > 0 && (
-        <>
-          <button onClick={finalizarCompra} disabled={comprando}>
-            {comprando ? 'Registrando...' : 'Finalizar compra'}
+        <div className="actions">
+          <button className="btn btn-primary" type="button"
+            onClick={finalizarCompra} disabled={comprando}>
+            {comprando ? 'Registrando...' : 'Realizar pedido'}
           </button>
-          <button onClick={onVaciar} disabled={comprando}>Vaciar carrito</button>
-        </>
+          <button className="btn btn-secondary" type="button"
+            onClick={onVaciar} disabled={comprando}>
+            Vaciar carrito
+          </button>
+        </div>
       )}
-      {mensaje && <p role="status">{mensaje}</p>}
+
+      {mensaje && <p className="ferre-note" role="status">{mensaje}</p>}
     </section>
   )
 }

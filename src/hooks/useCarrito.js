@@ -26,6 +26,12 @@ export default function useCarrito() {
       .filter((p) => p.cantidad > 0))
   }
 
-  function vaciar() { setCarrito([]) }
-  return { carrito, agregar, aumentar, disminuir, vaciar }
+
+function eliminar(id) {
+  setCarrito((actual) => actual.filter(p => p.idProducto !== id))
+}
+
+function vaciar() { setCarrito([]) }
+
+return { carrito, agregar, aumentar, disminuir, eliminar, vaciar }
 }

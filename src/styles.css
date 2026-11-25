@@ -1,0 +1,843 @@
+
+/* =========================================
+   ESTILOS GLOBALES - FERRESTOCK
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* 1. VARIABLES */
+
+:root {
+    --bg: #F5F7F9;
+    --surface: #FFFFFF;
+    --sidebar: #111827;
+    --sidebar-hover: #1F2937;
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --accent: #F97316;
+    --text: #0F172A;
+    --text-soft: #64748B;
+    --border: #E2E8F0;
+    --success: #22C55E;
+    --danger: #EF4444;
+    --radius: 18px;
+    --radius-card: 24px;
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.05),
+              0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+/* 2. ESTILOS GENERALES */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+img, svg {
+    max-width: 100%;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* 3. MENÚ DE NAVEGACIÓN */
+
+.topbar,
+.ferre-header {
+    width: 100%;
+    min-height: 90px;
+    padding: 18px 48px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar h1,
+.ferre-brand {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text);
+}
+
+.topbar nav,
+.ferre-nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.topbar nav a,
+.ferre-nav a,
+.ferre-nav button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px 16px;
+    border-radius: 12px;
+    color: var(--text-soft);
+    transition: .25s ease;
+}
+
+.ferre-nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.topbar nav a:hover,
+.ferre-nav a:hover,
+.ferre-nav button:hover,
+.ferre-nav .active {
+    background: #EFF6FF;
+    color: var(--primary);
+}
+
+.ferre-user {
+    color: var(--text-soft);
+    font-size: 13px;
+}
+
+/* 4. CONTENEDORES Y TARJETAS */
+
+.container {
+    max-width: 1280px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+.ferre-main {
+    display: grid;
+    gap: 24px;
+}
+
+.ferre-main h2 {
+    margin-bottom: 16px;
+}
+
+.card {
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    padding: 32px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, .8);
+}
+
+.ferre-muted {
+    color: var(--text-soft);
+    font-size: 13px;
+}
+
+.ferre-note {
+    margin-top: 10px;
+}
+
+.ferre-error {
+    color: #B91C1C;
+    background: #FEF2F2;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+/* 5. INICIO DE SESIÓN */
+
+.auth-container,
+.ferre-login-page {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.login-card,
+.ferre-login-card {
+    width: min(100%, 525px);
+    background: var(--surface);
+    border-radius: 28px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+}
+
+.login-card h1,
+.ferre-login-card h1 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 6px;
+}
+
+.ferre-login-card h2 {
+    font-size: 36px;
+    margin: 30px 0;
+}
+
+.ferre-login-card form {
+    display: grid;
+    gap: 8px;
+}
+
+.ferre-login-card label {
+    margin-top: 10px;
+}
+
+.ferre-login-card form .btn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.links,
+.ferre-login-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 24px;
+    color: var(--primary);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.links a:hover,
+.ferre-login-links a:hover {
+    text-decoration: underline;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    padding-right: 70px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    background: var(--border);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+/* 6. DASHBOARD */
+
+.ferre-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.ferre-stats strong {
+    display: block;
+    font-size: 30px;
+    color: var(--primary);
+    margin-top: 8px;
+}
+
+.ferre-actions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+/* 7. CARRUSEL DE CATEGORÍAS */
+
+.ferre-categories {
+    padding: 28px 32px;
+}
+
+.ferre-categories h2 {
+    font-size: 21px;
+    margin-bottom: 18px;
+}
+
+.ferre-category-list {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 4px 0 10px;
+    scrollbar-width: thin;
+}
+
+.ferre-category {
+    flex: 1 0 130px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    scroll-snap-align: start;
+    transition: .25s ease;
+    color: var(--text);
+}
+
+.ferre-category img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.ferre-category span {
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.ferre-category:hover,
+.ferre-category.active {
+    border-color: var(--primary);
+    background: #EFF6FF;
+    color: var(--primary);
+}
+
+/* 8. FILTROS Y BUSCADOR */
+
+.ferre-filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.ferre-filter-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+}
+
+.search {
+    width: 100%;
+    max-width: 520px;
+    margin-bottom: 24px;
+}
+
+/* 9. CATÁLOGO DE PRODUCTOS */
+
+.ferre-shop {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(280px, 1fr);
+    gap: 22px;
+    align-items: start;
+}
+
+.ferre-shop h2 {
+    font-size: 24px;
+    margin-bottom: 18px;
+}
+
+.ferre-products {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.ferre-product {
+    min-width: 0;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 22px;
+}
+
+.ferre-product-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+}
+
+.ferre-product-image {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    background: white;
+    border-radius: 14px;
+    padding: 10px;
+}
+
+.ferre-product-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #111827;
+    color: white;
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+.ferre-product-icon {
+    font-size: 38px;
+}
+
+.ferre-product h3 {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.ferre-product p {
+    margin: 0;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.ferre-product .btn-primary {
+    margin-top: auto;
+    width: 100%;
+}
+
+.ferre-product .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.ferre-product .actions .btn {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 8px;
+}
+
+.ferre-price {
+    color: var(--success);
+    font-size: 21px !important;
+    font-weight: 800;
+}
+
+/* 10. CARRITO DE COMPRAS */
+
+.ferre-cart {
+    padding: 28px;
+    position: sticky;
+    top: 110px;
+    border-radius: 24px;
+    background: white;
+    box-shadow: var(--shadow);
+}
+
+.ferre-cart-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.ferre-cart-heading h2 {
+    font-size: 23px;
+    margin: 0;
+}
+
+.ferre-cart-heading span {
+    background: #EFF6FF;
+    color: var(--primary);
+    padding: 6px 10px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.ferre-cart-empty {
+    text-align: center;
+    color: var(--text-soft);
+    padding: 18px 0;
+    font-size: 14px;
+}
+
+.ferre-cart-list {
+    list-style: none;
+    max-height: 420px;
+    overflow-y: auto;
+    margin: 16px 0;
+}
+
+.ferre-cart-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    gap: 8px;
+}
+
+.ferre-cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+.ferre-cart-item-info small {
+    display: block;
+    margin-top: 6px;
+}
+
+.ferre-cart-item-price {
+    text-align: right;
+    font-weight: 700;
+}
+
+.ferre-cart-list small {
+    color: var(--text-soft);
+    font-size: 13px;
+}
+
+.ferre-cart-remove {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--danger);
+    font-weight: 600;
+    cursor: pointer;
+    margin: 6px 0 0 auto;
+}
+
+.ferre-cart-remove:hover {
+    text-decoration: underline;
+}
+
+.ferre-cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ferre-cart-actions button {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: white;
+    padding: 5px 9px;
+    cursor: pointer;
+}
+
+.ferre-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    padding: 20px 0;
+    margin-top: 14px;
+    font-size: 17px;
+}
+
+.ferre-total strong:last-child {
+    color: var(--success);
+    font-size: 21px;
+}
+
+.ferre-cart > .btn,
+.ferre-cart .actions .btn {
+    width: 100%;
+}
+
+.ferre-cart .actions {
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 11. FORMULARIOS */
+
+#formulario-producto {
+    margin-top: 12px;
+    scroll-margin-top: 115px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: white;
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    transition: .25s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 5px rgba(37, 99, 235, .12);
+}
+
+.form-group,
+.form-group input,
+.form-group select {
+    margin-bottom: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    align-items: end;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+/* 12. BOTONES */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    padding: 15px 22px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, .18);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: white;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--bg);
+}
+
+.btn-terciary {
+    background: var(--accent);
+    color: white;
+}
+
+.btn-terciary:hover {
+    transform: translateY(-2px);
+}
+
+.actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+/* 13. TABLAS */
+
+.table-container,
+.ferre-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-card);
+    background: white;
+    border: 1px solid var(--border);
+}
+
+.table-container {
+    box-shadow: var(--shadow);
+}
+
+table,
+.ferre-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    padding: 20px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--text-soft);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 15px;
+}
+
+tr:hover {
+    background: var(--bg);
+}
+
+.ferre-table th,
+.ferre-table td {
+    padding: 13px;
+}
+
+/* 14. ESTADOS DE STOCK */
+
+.stock-low {
+    color: var(--danger);
+    font-weight: 800;
+}
+
+.stock-medium {
+    color: var(--accent);
+    font-weight: 800;
+}
+
+.stock-ok {
+    color: var(--success);
+    font-weight: 800;
+}
+
+/* 15. DISEÑO RESPONSIVE */
+
+@media (max-width: 1100px) {
+    .ferre-products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .ferre-shop {
+        grid-template-columns: 1fr;
+    }
+
+    .ferre-cart {
+        position: static;
+    }
+
+    .topbar,
+    .ferre-header {
+        padding: 18px 24px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .topbar nav,
+    .ferre-nav {
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 16px;
+        margin: 24px auto;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .form-grid,
+    .ferre-filters,
+    .ferre-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .ferre-login-card,
+    .login-card {
+        padding: 25px;
+    }
+
+    .toolbar,
+    .links {
+        flex-direction: column;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .ferre-products {
+        grid-template-columns: 1fr;
+    }
+
+    .ferre-product-image {
+        height: 220px;
+    }
+
+    .ferre-category {
+        flex: 0 0 110px;
+    }
+
+    .ferre-actions .btn {
+        width: 100%;
+    }
+}

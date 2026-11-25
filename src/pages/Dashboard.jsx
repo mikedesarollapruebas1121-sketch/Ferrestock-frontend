@@ -1,20 +1,33 @@
+
 import { Link } from 'react-router-dom'
 
 function Dashboard() {
   return (
-    <main>
-      <h1>Dashboard de Ferrestock</h1>
-      <p>Bienvenido al sistema de gestión</p>
+    <main className="container ferre-main">
+      <section className="card">
+        <h2>Panel Principal</h2>
+        <p>Bienvenido al sistema de gestión de Ferrestock.</p>
+      </section>
 
-      <nav>
-        <Link to="/productos">Ver productos</Link>
-        {' | '}
-        <Link to="/clientes">Ver clientes</Link>
-        {' | '}
-        <Link to="/">Volver al Login</Link>
-        {' | '}
-        <Link to="/categorias">Ver categorías</Link>
-      </nav>
+      <section className="card">
+        <h2>Acciones rápidas</h2>
+        <p>Selecciona la sección que deseas gestionar.</p>
+
+        <div className="ferre-actions">
+          <Link className="btn btn-primary" to="/productos">
+            Ver productos
+          </Link>
+          <Link className="btn btn-secondary" to="/clientes">
+            Ver clientes
+          </Link>
+          <Link className="btn btn-primary" to="/categorias">
+            Ver categorías
+          </Link>
+          <Link className="btn btn-secondary" to="/">
+            Volver al Login
+          </Link>
+        </div>
+      </section>
     </main>
   )
 }
